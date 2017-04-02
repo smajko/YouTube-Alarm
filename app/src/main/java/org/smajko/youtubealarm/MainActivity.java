@@ -94,8 +94,14 @@ public class MainActivity extends Activity {
 
 			//instantiate calendar to call alarm on time match
 			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getCurrentHour());
-			calendar.set(Calendar.MINUTE, alarmTimePicker.getCurrentMinute());
+
+			if (Build.VERSION.SDK_INT >= 23 ) {
+				calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getHour());
+				calendar.set(Calendar.MINUTE, alarmTimePicker.getMinute());
+			} else {
+				calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getCurrentHour());
+				calendar.set(Calendar.MINUTE, alarmTimePicker.getCurrentMinute());
+			}
 
 			//if time is set earlier than current (e.g set for 6:59pm, currently 7pm), do not play until next clock cycle/day
 			if(calendar.before(Calendar.getInstance())) {

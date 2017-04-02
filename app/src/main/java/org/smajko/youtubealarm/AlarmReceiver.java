@@ -43,7 +43,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             Intent alarmIntent = new Intent(context, AlarmActivity.class);
             alarmIntent.putExtra("seconds",seconds);
             alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startWakefulService(context, alarmIntent);
+            context.startActivity(alarmIntent);
         }
     }
 }
