@@ -26,6 +26,7 @@ public class AlarmActivity extends Activity {
     //closes the snooze/dismiss screen and finishes the activity
     public void dismissClicked(View view){
         MainActivity.ringtone.stop();
+        WakeLocker.release();
         finish();
     }
 
@@ -37,6 +38,7 @@ public class AlarmActivity extends Activity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         long triggerTime = System.currentTimeMillis() + seconds * DateUtils.SECOND_IN_MILLIS;
         snoozeManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        WakeLocker.release();
         finish();
     }
 }

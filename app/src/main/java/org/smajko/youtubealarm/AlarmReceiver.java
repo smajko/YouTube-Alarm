@@ -19,7 +19,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         int seconds = intent.getIntExtra("seconds",0);
 
         //check current network connection to decide whether to use default ringtone
-        MainActivity.cmanager = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+        MainActivity.cmanager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         MainActivity.networkInfoObj = MainActivity.cmanager.getActiveNetworkInfo();
 
         //if phone has a network connection, create intent that parses a youtube link and starts the youtube player
@@ -38,11 +38,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                     MainActivity.alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
                 }
             }
-            //MainActivity.ringtone = RingtoneManager.getRingtone(context, MainActivity.alarmUri);
 
-            //play default alarm and set parameters for dismiss/snooze screen, then start the activity
-            //MainActivity.ringtone.play();
-
+            WakeLocker.acquire(context);
             Intent alarmIntent = new Intent(context, AlarmActivity.class);
             alarmIntent.putExtra("seconds",seconds);
             alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
