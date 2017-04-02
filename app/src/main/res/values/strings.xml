@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YouTube Alarm</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_alarm_activity">AlarmActivity</string>
+
+    <!-- activity_main -->
+    <string name="streamBox">Stream Mode</string>
+    <string name="optionButton">Options</string>
+    <string name="title_option_activity">Options</string>
+
+    <!-- activity_alarm -->
+    <string name="dismiss_str">Dismiss</string>
+    <string name="snooze_str">Snooze</string>
+
+    <!-- activity_options -->
+    <string name="snooze_option">Seconds to snooze for:</string>
+    <string name="yt_option">YouTube link:</string>
+    <string name="apply_option">Apply</string>
+
+</resources>

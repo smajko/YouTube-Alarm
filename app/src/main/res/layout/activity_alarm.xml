@@ -1,0 +1,23 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlarmActivity">
+
+    <Button
+        android:id="@+id/dismiss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="dismissClicked"
+        android:text="@string/dismiss_str" />
+
+    <Button
+        android:id="@+id/snooze"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:onClick="snoozeClicked"
+        android:text="@string/snooze_str" />
+
+</LinearLayout>
