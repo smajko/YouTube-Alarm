@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -37,7 +38,17 @@ public class AlarmActivity extends Activity {
         Intent myIntent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         long triggerTime = System.currentTimeMillis() + seconds * DateUtils.SECOND_IN_MILLIS;
-        snoozeManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+
+        if(Build.VERSION.SDK_INT < 23){
+            if(Build.VERSION.SDK_INT >= 19)
+                snoozeManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+            else
+                snoozeManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        }
+        else {
+            snoozeManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        }
+
         WakeLocker.release();
         finish();
     }

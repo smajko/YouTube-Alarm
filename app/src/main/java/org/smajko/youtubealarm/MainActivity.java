@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
@@ -112,7 +113,15 @@ public class MainActivity extends Activity {
 
 			//create pending intent to broadcast to activity that plays the alarm
 			pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-			alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+			if(Build.VERSION.SDK_INT < 23){
+				if(Build.VERSION.SDK_INT >= 19)
+					alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+				else
+					alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+			}
+			else {
+				alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+			}
 		} else {
 			//cancel any pending intent on toggle off
 			alarmManager.cancel(pendingIntent);
